@@ -27,3 +27,11 @@ run.sh has some options which you can set via Environment variables.
 * HOST_DISPLAY - Allow the container to use the Display of the host. E.g. Let the emulator run on the Hosts Display environment.
 
 You may use a Variable like this: "HOST_NET=1 ./run.sh"
+
+Additional information - continous integration
+-------------
+I included a script under provisioning/ndkTests.sh which demonstrates how you may use this container in a CI environment. 
+The script starts a headless container, if the HOSTNAME variable is set to CI. 
+It then changes in to a directory (workspace/GoogleTestApp) where it builds and installs an app. 
+It parses logcat for lines containing a string (GoogleTest), uninstalls the app and does some analysis on the parsed lines.
+While this script probably does not make much sense FOR YOU, it might be useful as a guiding point for you.

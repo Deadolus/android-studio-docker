@@ -37,7 +37,7 @@ fi
 echo "Found a device \"$device\" to use"
 
 #Install our tests
-pushd /studio-data/workspace/GoogleTestAndroidGnssHal/
+pushd /studio-data/workspace/GoogleTestApp/
 #Build and install our app(s)
 ./gradlew installDebug || exit -1
 #clean, assembleDebug, generateDebugSources
