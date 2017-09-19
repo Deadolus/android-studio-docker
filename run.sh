@@ -16,7 +16,4 @@ fi
 if [ "$HOST_DISPLAY" != "" ]; then
 AOSP_ARGS="${AOSP_ARGS} --env=DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix"
 fi
-#docker run -it --net=host -e DISPLAY=:0 -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`/studio-data:/studio-data -v /dev/bus/usb:/dev/bus/usb -v ~/repos/AndroidGnssHal:/AndroidGnssHal --privileged u-blox/android-studio $@
-#docker run -it --net=host --env="DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/home/android/.Xauthority -v `pwd`/studio-data:/studio-data -v /dev/bus/usb:/dev/bus/usb -v ~/aosp-docker/_gnss_hal/:/AndroidGnssHal --privileged u-blox/android-studio $@
-#docker run -it --net=host --env="DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`/studio-data:/studio-data -v /dev/bus/usb:/dev/bus/usb -v ~/aosp-docker/_gnss_hal/:/AndroidGnssHal --privileged u-blox/android-studio $@
-docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data -v $ANDROID_GNSS_PATH:/AndroidGnssHal --privileged --group-add plugdev -v ~/repos/gps-measurement-tools:/gps u-blox/android-studio $@
+docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data --privileged --group-add plugdev deadolus/android-studio $@
