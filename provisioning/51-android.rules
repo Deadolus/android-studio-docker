@@ -1,0 +1,2 @@
+SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0660", 
+GROUP="plugdev", SYMLINK+="android%n"
