@@ -1,13 +1,9 @@
 #!/bin/bash
-# This sript will install our Google Tests on an Android device. 
-# If needed the script will start an Emulator beforehand. 
-#It will then run those tests and analyze the results. 
-#Will return 0 if everything succeeded. 
+# This sript will install our Google Tests on an Android device.
+# If needed the script will start an Emulator beforehand.
+#It will then run those tests and analyze the results.
+#Will return 0 if everything succeeded.
 #If there were failed tests it will return the number of failed tests
-
-#Number of tests which will be run on Framework, 
-#needed to ensure everything is written to console
-NR_OF_TESTS=2
 
 #Ensure server is started
 /studio-data/platform-tools/adb start-server || exit -1
@@ -16,7 +12,7 @@ if [ `/studio-data/platform-tools/adb devices | grep device | wc -l` -lt 2 ] ; t
     echo "No device found - starting Emulator"
     if [ "$HOSTNAME" = "CI" ]; then
       #Start a virtual framebuffer for continous integration, as we do not have a Display attached
-      echo "Starting xvfb for manatee..."
+      echo "Starting xvfb for CI..."
       Xvfb :1 &
       export DISPLAY=:1
       #Does not seem to work with GPU, so turn gpu processing off (slower)
@@ -26,7 +22,7 @@ if [ `/studio-data/platform-tools/adb devices | grep device | wc -l` -lt 2 ] ; t
 fi
     #/studio-data/emulator/emulator -avd Android_O &
     echo "Will now wait for the Emulator"
-    #/studio-data/platform-tools/adb wait-for-device -s `/studio-data/platform-tools/adb devices | grep emulator` 
+    #/studio-data/platform-tools/adb wait-for-device -s `/studio-data/platform-tools/adb devices | grep emulator`
     while (! /studio-data/platform-tools/adb devices | grep emulator | grep device > /dev/null); do sleep 1; echo -n "."; done
 fi
 device=`/studio-data/platform-tools/adb devices | grep -Po ".*(?= *device$)" | head -n1`
@@ -45,8 +41,7 @@ popd
 #Clear old logcat data
 /studio-data/platform-tools/adb -s $device logcat -c || exit -1
 #(Force-)Start our tests
-/studio-data/platform-tools/adb -s $device shell am start -S -n com.example.ublox.haltest/com.example.ublox.haltest.MainActivity 
-/studio-data/platform-tools/adb -s $device shell am start -S -n com.example.ublox.parsertest/com.example.ublox.parsertest.MainActivity
+/studio-data/platform-tools/adb -s $device shell am start -S -n com.example.company.testApp/com.example.company.testApp.MainActivity
 
 #Wait for the latest adb log data to arrive
 while [ `/studio-data/platform-tools/adb -s $device logcat -d -s "GoogleTest" | grep "End Result" | wc -l` -lt 2 ] ; do
