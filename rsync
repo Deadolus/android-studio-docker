@@ -1,1 +1,0 @@
-rsync -avz ./studio-data/profile embuser@whale:/u-blox/swdev/tds-android-studio-docker/studio-data/
