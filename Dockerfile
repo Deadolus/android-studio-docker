@@ -44,6 +44,7 @@ RUN tar xzvf android-studio.tar.gz
 RUN rm android-studio.tar.gz
 
 RUN ln -s /studio-data/profile/AndroidStudio$ANDROID_STUDIO_VERSION .AndroidStudio$ANDROID_STUDIO_VERSION
+RUN ln -s /studio-data/Android Android
 RUN ln -s /studio-data/profile/android .android
 RUN ln -s /studio-data/profile/java .java
 RUN ln -s /studio-data/profile/gradle .gradle
