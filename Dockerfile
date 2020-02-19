@@ -3,7 +3,6 @@ FROM ubuntu:18.04
 MAINTAINER Simon Egli <docker_android_studio_860dd6@egli.online>
 
 ARG USER=android
-ARG ANDROID_STUDIO_URL=https://dl.google.com/dl/android/studio/ide-zips/3.5.3.0/android-studio-ide-191.6010548-linux.tar.gz
 
 RUN dpkg --add-architecture i386
 RUN apt-get update && apt-get install -y \
@@ -37,6 +36,7 @@ USER $USER
 
 WORKDIR /home/$USER
 
+ARG ANDROID_STUDIO_URL=https://dl.google.com/dl/android/studio/ide-zips/3.5.3.0/android-studio-ide-191.6010548-linux.tar.gz
 RUN wget "$ANDROID_STUDIO_URL" -O android-studio.tar.gz
 RUN tar xzvf android-studio.tar.gz
 RUN rm android-studio.tar.gz
