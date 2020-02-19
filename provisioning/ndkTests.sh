@@ -6,9 +6,10 @@
 #If there were failed tests it will return the number of failed tests
 
 #Ensure server is started
-/studio-data/platform-tools/adb start-server || exit -1
+ADB="/studio-data/Android/Sdk/platform-tools/adb"
+"$ADB" start-server || exit 1
 
-if [ `/studio-data/platform-tools/adb devices | grep device | wc -l` -lt 2 ] ; then
+if [ "$("$ADB" devices | grep device | wc -l)" -lt 2 ] ; then
     echo "No device found - starting Emulator"
     if [ "$HOSTNAME" = "CI" ]; then
       #Start a virtual framebuffer for continous integration, as we do not have a Display attached
@@ -23,37 +24,37 @@ fi
     #/studio-data/emulator/emulator -avd Android_O &
     echo "Will now wait for the Emulator"
     #/studio-data/platform-tools/adb wait-for-device -s `/studio-data/platform-tools/adb devices | grep emulator`
-    while (! /studio-data/platform-tools/adb devices | grep emulator | grep device > /dev/null); do sleep 1; echo -n "."; done
+    while (! "$ADB" devices | grep emulator | grep device > /dev/null); do sleep 1; echo -n "."; done
 fi
-device=`/studio-data/platform-tools/adb devices | grep -Po ".*(?= *device$)" | head -n1`
+device=$("ADB" devices | grep -Po ".*(?= *device$)" | head -n1)
 if [ "$device" = "" ]; then
   echo "Error in acquiring device, exiting..."
-  exit -1
+  exit 1
 fi
 echo "Found a device \"$device\" to use"
 
 #Install our tests
 pushd /studio-data/workspace/GoogleTestApp/
 #Build and install our app(s)
-./gradlew installDebug || exit -1
+./gradlew installDebug || exit 1
 #clean, assembleDebug, generateDebugSources
 popd
 #Clear old logcat data
-/studio-data/platform-tools/adb -s $device logcat -c || exit -1
+"$ADB" -s $device logcat -c || exit 1
 #(Force-)Start our tests
-/studio-data/platform-tools/adb -s $device shell am start -S -n com.example.company.testApp/com.example.company.testApp.MainActivity
+"$ADB" -s $device shell am start -S -n com.example.company.testApp/com.example.company.testApp.MainActivity
 
 #Wait for the latest adb log data to arrive
-while [ `/studio-data/platform-tools/adb -s $device logcat -d -s "GoogleTest" | grep "End Result" | wc -l` -lt 2 ] ; do
+while [ $("$ADB" -s $device logcat -d -s "GoogleTest" | grep "End Result" | wc -l) -lt 2 ] ; do
   sleep 0.5
 done
 
 #Get our data from logcat and save it
-/studio-data/platform-tools/adb -s $device logcat -d -s "GoogleTest" > test_results.txt || exit -1
+"$ADB" -s $device logcat -d -s "GoogleTest" > test_results.txt || exit 1
 
 #Uninstall our Tests again
 pushd /studio-data/workspace/GoogleTestAndroidGnssHal/
-./gradlew uninstallDebug || exit -1
+./gradlew uninstallDebug || exit 1
 popd
 
 #Filter out the failed tests from the log file we pulled
@@ -65,8 +66,8 @@ echo "All tests passed"
 exit 0
 fi
 
-/studio-data/platform-tools/adb -s $device emu kill
-while (/studio-data/platform-tools/adb devices | grep $device > /dev/null) ; do
+"$ADB" -s $device emu kill
+while ("$ADB" devices | grep $device > /dev/null) ; do
 sleep 0.5
 done
 
