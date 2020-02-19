@@ -27,8 +27,6 @@ RUN usermod -aG plugdev $USER
 
 VOLUME /androidstudio-data
 RUN chown $USER:$USER /androidstudio-data
-VOLUME /AndroidGnssHal
-RUN chown $USER:$USER /AndroidGnssHal
 
 COPY provisioning/docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 COPY provisioning/ndkTests.sh /usr/local/bin/ndkTests.sh
