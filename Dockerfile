@@ -43,7 +43,6 @@ RUN wget "$ANDROID_STUDIO_URL" -O android-studio.tar.gz
 RUN tar xzvf android-studio.tar.gz
 RUN rm android-studio.tar.gz
 
-RUN ln -s /studio-data/profile/AndroidStudio2.3 .AndroidStudio2.3
 RUN ln -s /studio-data/profile/android .android
 RUN ln -s /studio-data/profile/java .java
 RUN ln -s /studio-data/profile/gradle .gradle
