@@ -18,8 +18,9 @@ AOSP_ARGS="${AOSP_ARGS} --env=DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix"
 fi
 
 #Make sure prerequisite directories exist in studio-data dir
-mkdir -p studio-data/profile/AndroidStudio2.3
+mkdir -p studio-data/profile/AndroidStudio${ANDROID_STUDIO_VERSION}
 mkdir -p studio-data/profile/android
 mkdir -p studio-data/profile/gradle
 mkdir -p studio-data/profile/java
-docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data --privileged --group-add plugdev deadolus/android-studio $@
+docker volume create --name=android_studio
+docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data -v android_studio:/androidstudio-data --privileged --group-add plugdev deadolus/android-studio $@
