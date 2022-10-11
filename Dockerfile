@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-MAINTAINER Simon Egli <docker_android_studio_860dd6@egli.online>
+LABEL Simon Egli <docker_android_studio_860dd6@egli.online>
 
 ARG USER=android
 
@@ -8,7 +8,7 @@ RUN dpkg --add-architecture i386
 RUN apt-get update && apt-get install -y \
         build-essential git neovim wget unzip sudo \
         libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 \
-        libxrender1 libxtst6 libxi6 libfreetype6 libxft2 \
+        libxrender1 libxtst6 libxi6 libfreetype6 libxft2 xz-utils vim\
         qemu qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils libnotify4 libglu1 libqt5widgets5 openjdk-8-jdk xvfb \
         && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -36,8 +36,17 @@ USER $USER
 
 WORKDIR /home/$USER
 
-ARG ANDROID_STUDIO_URL=https://dl.google.com/dl/android/studio/ide-zips/3.5.3.0/android-studio-ide-191.6010548-linux.tar.gz
-ARG ANDROID_STUDIO_VERSION=3.5
+#Install Flutter
+ARG FLUTTER_URL=https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_1.22.2-stable.tar.xz
+ARG FLUTTER_VERSION=1.22.2
+
+RUN wget "$FLUTTER_URL" -O flutter.tar.xz
+RUN tar -xvf flutter.tar.xz
+RUN rm flutter.tar.xz
+
+#Android Studio
+ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.1.3.0/android-studio-ide-201.7199119-linux.tar.gz
+ARG ANDROID_STUDIO_VERSION=4.1.3
 
 RUN wget "$ANDROID_STUDIO_URL" -O android-studio.tar.gz
 RUN tar xzvf android-studio.tar.gz
