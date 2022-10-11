@@ -46,3 +46,8 @@ The script starts a headless container, if the HOSTNAME variable is set to CI.
 It then changes in to a directory (workspace/GoogleTestApp) where it builds and installs an app.
 It parses logcat for lines containing a string (GoogleTest), uninstalls the app and does some analysis on the parsed lines.
 While this script probably does not make much sense FOR YOU, it might be useful as a guiding point for you.
+
+Contributors
+------------
+[@Deadolus](https://github.com/Deadolus)  
+[@guilhermelinhares](https://github.com/guilhermelinhares)  
