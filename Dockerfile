@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
         build-essential git neovim wget unzip sudo \
         libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 \
         libxrender1 libxtst6 libxi6 libfreetype6 libxft2 xz-utils vim\
-        qemu qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils libnotify4 libglu1 libqt5widgets5 openjdk-8-jdk xvfb \
+        qemu qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils libnotify4 libglu1 libqt5widgets5 openjdk-8-jdk openjdk-11-jdk xvfb \
         && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -45,8 +45,8 @@ RUN tar -xvf flutter.tar.xz
 RUN rm flutter.tar.xz
 
 #Android Studio
-ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.1.3.0/android-studio-ide-201.7199119-linux.tar.gz
-ARG ANDROID_STUDIO_VERSION=4.1.3
+ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2022.1.1.21/android-studio-2022.1.1.21-linux.tar.gz
+ARG ANDROID_STUDIO_VERSION=2022.1.1.21
 
 RUN wget "$ANDROID_STUDIO_URL" -O android-studio.tar.gz
 RUN tar xzvf android-studio.tar.gz
