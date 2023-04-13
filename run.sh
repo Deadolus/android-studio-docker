@@ -18,7 +18,7 @@ AOSP_ARGS="${AOSP_ARGS} --env=DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix"
 fi
 
 #Make sure prerequisite directories exist in studio-data dir
-mkdir -p studio-data/profile/AndroidStudio${ANDROID_STUDIO_VERSION}
+mkdir -p studio-data/profile/AndroidStudio2022.1.1.21
 mkdir -p studio-data/profile/android
 mkdir -p studio-data/profile/gradle
 mkdir -p studio-data/profile/java

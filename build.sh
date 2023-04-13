@@ -1,4 +1,4 @@
-mkdir -p studio-data/profile/AndroidStudio4.1.3 || exit
+mkdir -p studio-data/profile/AndroidStudio2022.1.1.21 || exit
 mkdir -p studio-data/Android || exit
 mkdir -p studio-data/profile/.android || exit
 mkdir -p studio-data/profile/.java || exit
