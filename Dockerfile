@@ -37,16 +37,16 @@ USER $USER
 WORKDIR /home/$USER
 
 #Install Flutter
-ARG FLUTTER_URL=https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_1.22.2-stable.tar.xz
-ARG FLUTTER_VERSION=1.22.2
+ARG FLUTTER_URL=https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.6-stable.tar.xz
+ARG FLUTTER_VERSION=3.13.6
 
 RUN wget "$FLUTTER_URL" -O flutter.tar.xz
 RUN tar -xvf flutter.tar.xz
 RUN rm flutter.tar.xz
 
 #Android Studio
-ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2022.1.1.21/android-studio-2022.1.1.21-linux.tar.gz
-ARG ANDROID_STUDIO_VERSION=2022.1.1.21
+ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2022.3.1.20/android-studio-2022.3.1.20-linux.tar.gz
+ARG ANDROID_STUDIO_VERSION=2022.3.1.20
 
 RUN wget "$ANDROID_STUDIO_URL" -O android-studio.tar.gz
 RUN tar xzvf android-studio.tar.gz
