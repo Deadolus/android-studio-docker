@@ -23,7 +23,7 @@ RUN echo "$USER:$USER" | chpasswd
 RUN echo "${USER} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-$USER
 RUN usermod -aG sudo $USER
 RUN usermod -aG plugdev $USER
-
+RUN mkdir -p /androidstudio-data
 VOLUME /androidstudio-data
 RUN chown $USER:$USER /androidstudio-data
 
