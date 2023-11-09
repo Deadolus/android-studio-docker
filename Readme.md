@@ -61,6 +61,6 @@ Contributors
 [@Deadolus](https://github.com/Deadolus)  
 [@guilhermelinhares](https://github.com/guilhermelinhares)  
 [@mtomcanyi](https://github.com/mtomcanyi)  
-[@Naveenkhegde](https://github.com/Naveenkhegde)
+[@Naveenkhegde](https://github.com/Naveenkhegde)  
 [@BenBlumer](https://github.com/BenBlumer)
 
