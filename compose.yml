@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  android_emulator:
+    image: deadolus/android-studio
+    build: .
+    volumes:
+      - ./studio-data/profile/AndroidStudio2022.3.1.20:/studio-data/profile/AndroidStudio2022.3.1.20
+      - ./studio-data/Android:/studio-data/Android
+      - ./studio-data/profile/.android:/studio-data/profile/.android
+      - ./studio-data/profile/.java:/studio-data/profile/.java
+      - ./studio-data/profile/.gradle:/studio-data/profile/.gradle
+       # Mount the proper location for X11 server if you are running this in WSL
+      - /mnt/wslg/.X11-unix:/tmp/.X11-unix
+       # Mount the proper locationm for x11 server if you are running this in native linux
+#      - /tmp/.X11-unix:/tmp/.X11-unix .
+      - android_studio:/androidstudio-data
+    environment:
+      - DISPLAY=:0 # Set DISPLAY environment variable
+    privileged: true
+    group_add:
+      - plugdev
+    network_mode: "host"
+#    devices:
+      # Uncomment the previous and next line if you want to pass through USB to the container.
+      # - /dev/bus/usb:/dev/bus/usb
+    entrypoint: /usr/local/bin/docker_entrypoint.sh
+volumes:
+  android_studio:

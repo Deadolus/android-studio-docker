@@ -23,9 +23,16 @@ RUN echo "$USER:$USER" | chpasswd
 RUN echo "${USER} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-$USER
 RUN usermod -aG sudo $USER
 RUN usermod -aG plugdev $USER
-
+RUN mkdir -p /androidstudio-data
 VOLUME /androidstudio-data
 RUN chown $USER:$USER /androidstudio-data
+
+RUN mkdir -p /studio-data/Android/Sdk && \
+    chown -R $USER:$USER /studio-data/Android
+
+
+RUN mkdir -p /studio-data/profile/android && \
+    chown -R $USER:$USER /studio-data/profile
 
 COPY provisioning/docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 COPY provisioning/ndkTests.sh /usr/local/bin/ndkTests.sh

@@ -7,13 +7,13 @@ If you don't have a display the Emulator can run with a "dummy" display - perfec
 
 Tested on Linux only.
 
-Building
+Building without docker compose
 -------------
 Just run "./build.sh", or "docker build -t deadolus/android-studio ." directly.
 An already built version is also on Docker Hub. So you may also run "docker pull deadolus/android-studio".
 You may of course change the name of the container.
 
-Running
+Running without docker compose
 -------------
 Run
 
@@ -39,6 +39,15 @@ So it probably does not make sense to try starting via run.sh without
 HOST_DISPLAY=1.
 If you just want a shell in the container, without starting Android Studio, run "./run.sh bash" to bypass starting Android Studio
 
+Running and Building with docker compose:
+-------------
+
+1. Comment/uncomment the appropriate lines in the compose.yaml depending on if you are running this natively in linux or in WSL.
+2. To build: `docker compose build android_emulator`
+3. To run: `docker compose run android_emulator`
+
+
+
 Additional information - continous integration
 -------------
 I included a script under provisioning/ndkTests.sh which demonstrates how you may use this container in a CI environment.
@@ -53,3 +62,5 @@ Contributors
 [@guilhermelinhares](https://github.com/guilhermelinhares)  
 [@mtomcanyi](https://github.com/mtomcanyi)  
 [@Naveenkhegde](https://github.com/Naveenkhegde)
+[@BenBlumer](https://github.com/BenBlumer)
+
