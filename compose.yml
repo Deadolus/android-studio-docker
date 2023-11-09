@@ -22,7 +22,7 @@ services:
 #    devices:
       # Uncomment the next line if you want to pass through USB to the container.
       # - /dev/bus/usb:/dev/bus/usb
-    hostname: "${DOCKERHOSTNAME:-default-hostname}" # Use default hostname if DOCKERHOSTNAME is not set
+#    hostname: "${DOCKERHOSTNAME:-default-hostname}" # Use default hostname if DOCKERHOSTNAME is not set
     entrypoint: /usr/local/bin/docker_entrypoint.sh
 volumes:
   android_studio:

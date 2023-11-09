@@ -30,6 +30,10 @@ RUN chown $USER:$USER /androidstudio-data
 RUN mkdir -p /studio-data/Android/Sdk && \
     chown -R $USER:$USER /studio-data/Android
 
+
+RUN mkdir -p /studio-data/profile/android && \
+    chown -R $USER:$USER /studio-data/profile
+
 COPY provisioning/docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 COPY provisioning/ndkTests.sh /usr/local/bin/ndkTests.sh
 RUN chmod +x /usr/local/bin/*
