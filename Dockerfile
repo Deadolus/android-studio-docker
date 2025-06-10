@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-LABEL Simon Egli <docker_android_studio_860dd6@egli.online>
+LABEL org.opencontainers.image.authors="Simon Egli <4662005+Deadolus@users.noreply.github.com>"
 
 ARG USER=android
 
